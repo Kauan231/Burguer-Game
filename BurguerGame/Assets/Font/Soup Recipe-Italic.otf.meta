@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 8ffa254d3f7775944b60aaa00acae72e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Soup Recipe
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1ca96c187b3519a41b4509f1fbf8432f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
