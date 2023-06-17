@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07edf7fb21eee8e438cd45ce8d0b7b9d, type: 3}
   m_Name: New Hamburguer
   m_EditorClassIdentifier: 
-  RecipeName: TESTER2
+  RecipeName: 1
   Ingredients: 000000000100000002000000

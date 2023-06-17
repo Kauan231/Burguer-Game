@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Salad
+  - Patty
+  - Tomato
+  - Cucumber
+  - Cheese
+  - BreadTop
+  - BreadBottom
   layers:
   - Default
   - TransparentFX
@@ -11,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - OnHamburguer
   - 
   - 
   - 
