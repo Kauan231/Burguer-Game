@@ -10,11 +10,18 @@ namespace HamburguerGame {
         [SerializeField] private GameObject InstancesPivot, Cheese, Patty, Cucumber, Salad, Tomato, BreadTop, BreadBottom;
         [SerializeField] private HamburguerManager _control;
         private List<ValidIngredients> CurrentIngredientsSelected = new List<ValidIngredients>();
-        private List<GameObject> InstantiatedIngredients = new List<GameObject>();
+        public List<GameObject> InstantiatedIngredients = new List<GameObject>();
         private GameObject _lastAddedItem;
 
         private void InstanceIngredients(GameObject _template) {
-            if(InstantiatedIngredients.Any()) _lastAddedItem = InstantiatedIngredients.Last();
+            if(InstantiatedIngredients.Any()) {
+                if(InstantiatedIngredients.Last() == null)
+                {
+                    InstantiatedIngredients.Remove(InstantiatedIngredients.Last());
+                }
+                _lastAddedItem = InstantiatedIngredients.Last();
+                _lastAddedItem.GetComponent<BoxCollider>().enabled = false;
+            }
     
             GameObject _instance = Instantiate(_template);
             _instance.transform.parent = InstancesPivot.transform;
@@ -39,7 +46,7 @@ namespace HamburguerGame {
         public void AddIngredientFunction(string _ingredient)
         {
             if(!CurrentIngredientsSelected.Any()      && !_ingredient.Equals("BreadBottom")) return;    
-            if((CurrentIngredientsSelected.Count > 4) && !_ingredient.Equals("BreadTop"))    return;    
+            if((CurrentIngredientsSelected.Count > 3) && !_ingredient.Equals("BreadTop"))    return;    
             
             ValidIngredients SelectedIngredient = (ValidIngredients)Enum.Parse(typeof(ValidIngredients), _ingredient);
             CurrentIngredientsSelected.Add(SelectedIngredient);
@@ -76,6 +83,10 @@ namespace HamburguerGame {
             CurrentIngredientsSelected.Remove(SelectedIngredient);
             InstantiatedIngredients.Remove(_ingredientToRemove);
             Destroy(_ingredientToRemove);
+            
+            if(InstantiatedIngredients.Any()) {
+                InstantiatedIngredients.Last().GetComponent<BoxCollider>().enabled = true;
+            }
         }
 
         public void ResetHamburguerSelection() {

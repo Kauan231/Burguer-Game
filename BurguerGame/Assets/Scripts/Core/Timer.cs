@@ -18,7 +18,7 @@ namespace Core {
             if(_seconds <= 0 && _minutes <= 0) {
                 FinishGame = true;
             } 
-            if(_seconds <= 0) {
+            if(_seconds <= 0 && _minutes > 0) {
                 _minutes--;
                 _seconds = 60f;
             }
