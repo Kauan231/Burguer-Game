@@ -2,7 +2,7 @@
 [![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/Kauan231/Burguer-Game/blob/main/README.pt-br.md)
 
 # Burguer-Game
-🇧🇷
+![🇧🇷](https://github.githubassets.com/images/icons/emoji/unicode/1f1e7-1f1f7.png?v8)
 ## Burguer Rush é um jogo teste com a proposta de montar a maior quantia de hamburgueres em 2 minutos.
 ### - Mecânicas:
   - Arraste e solte os ingredientes na bandeja para adiciona-los ao hamburguer.
