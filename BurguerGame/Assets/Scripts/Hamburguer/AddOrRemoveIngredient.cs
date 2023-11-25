@@ -13,6 +13,8 @@ namespace HamburguerGame {
         public List<GameObject> InstantiatedIngredients = new List<GameObject>();
         private GameObject _lastAddedItem;
 
+        public AudioSource Place;
+
         private void InstanceIngredients(GameObject _template) {
             if(InstantiatedIngredients.Any()) {
                 if(InstantiatedIngredients.Last() == null)
@@ -47,7 +49,7 @@ namespace HamburguerGame {
         {
             if(!CurrentIngredientsSelected.Any()      && !_ingredient.Equals("BreadBottom")) return;    
             if((CurrentIngredientsSelected.Count > 3) && !_ingredient.Equals("BreadTop"))    return;    
-            
+            Place.Play();
             ValidIngredients SelectedIngredient = (ValidIngredients)Enum.Parse(typeof(ValidIngredients), _ingredient);
             CurrentIngredientsSelected.Add(SelectedIngredient);
             switch(SelectedIngredient)
@@ -83,7 +85,7 @@ namespace HamburguerGame {
             CurrentIngredientsSelected.Remove(SelectedIngredient);
             InstantiatedIngredients.Remove(_ingredientToRemove);
             Destroy(_ingredientToRemove);
-            
+            Place.Play();
             if(InstantiatedIngredients.Any()) {
                 InstantiatedIngredients.Last().GetComponent<BoxCollider>().enabled = true;
             }

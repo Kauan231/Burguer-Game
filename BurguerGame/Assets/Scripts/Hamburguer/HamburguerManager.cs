@@ -15,6 +15,8 @@ namespace HamburguerGame {
         private ShowRecipe _ShowRecipe;
         [SerializeField] private AddOrRemoveIngredient _ingredientManager;
         public Hamburguer CurrentHamburguer;      
+
+        public bool Generate_Random;
         public void CheckHamburguer(List<ValidIngredients> _SelectedIngredients)
         {
             bool isEqual = CurrentHamburguer.Ingredients.All(_SelectedIngredients.Contains);
@@ -25,13 +27,19 @@ namespace HamburguerGame {
                 _managerCore.RemovePoints();
             }
             
-            if(CurrentHamburguer == CustomersOrders.Last()) {
-                _managerCore.EndGame();
-            } else {
-                CustomerOrderIterator++;
-                CurrentHamburguer = CustomersOrders[CustomerOrderIterator];
+            if(Generate_Random){
                 _ShowRecipe.ChangeRecipe(CurrentHamburguer);
             }
+            else {
+                if(CurrentHamburguer == CustomersOrders.Last()) {
+                    _managerCore.EndGame();
+                } else {
+                    CustomerOrderIterator++;
+                    CurrentHamburguer = CustomersOrders[CustomerOrderIterator];
+                    _ShowRecipe.ChangeRecipe(CurrentHamburguer);
+                }
+            }
+            
             _ingredientManager.ResetHamburguerSelection();
         }
 

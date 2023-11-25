@@ -13,15 +13,19 @@ namespace Core {
         public Text FinalScoreUI;  
         bool _gameEnded;
 
+        public AudioSource Wrong, Correct;
+
         public void AddPoints() {
+            Correct.Play();
             Points += 10;
         }
         public void RemovePoints() {
+            Wrong.Play();
             Points -= 20;
         }
         public void EndGame() {
             _gameEnded = true; 
-            FinalScoreUI.text = "Pontuação Final: " + Points.ToString();
+            FinalScoreUI.text = Points.ToString();
             EndGamePageUI.SetActive(true);
             gameObject.SetActive(false);
             Debug.Log("END");

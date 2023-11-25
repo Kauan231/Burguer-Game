@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +18,7 @@ namespace HamburguerGame {
         float Item2_Position = .51f;
         float Item3_Position = .77f;
 
+        public bool Generate_Random;
 
         private void ChangeVerticalPositon(Transform _transform, int _iterator) {
             switch(_iterator){
@@ -45,6 +48,78 @@ namespace HamburguerGame {
 
         public void ChangeRecipe(Hamburguer _currentHamburguer)
         {
+            if(Generate_Random) {
+                GenerateRandom(_currentHamburguer);
+            }
+            else {
+                getFromList(_currentHamburguer);
+            }
+        }
+        
+
+        public void GenerateRandom(Hamburguer _currentHamburguer) {
+            foreach(GameObject Instance in InstantiatedObjectsUI) { 
+                Destroy(Instance);
+            };
+
+            InstantiatedObjectsUI.Clear();
+
+            
+            for(int i = 0; i <  3; i++){
+                var rnd = new System.Random();
+                int randomIndex = rnd.Next(0, 5);
+                ValidIngredients toAdd = (ValidIngredients)randomIndex;
+                _currentHamburguer.Ingredients[i] = toAdd;
+            }
+            
+            int numOfPatty = _currentHamburguer.Ingredients.ToList<ValidIngredients>().Where(x => x.Equals(ValidIngredients.Patty)).Count();
+            int numOfChesse = _currentHamburguer.Ingredients.ToList<ValidIngredients>().Where(x => x.Equals(ValidIngredients.Cheese)).Count();
+            int numOfSalad = _currentHamburguer.Ingredients.ToList<ValidIngredients>().Where(x => x.Equals(ValidIngredients.Salad)).Count();
+            int numOfCucumber = _currentHamburguer.Ingredients.ToList<ValidIngredients>().Where(x => x.Equals(ValidIngredients.Cucumber)).Count();
+            int numOfTomato = _currentHamburguer.Ingredients.ToList<ValidIngredients>().Where(x => x.Equals(ValidIngredients.Tomato)).Count();
+            
+            string _recipename = "";
+
+            
+            if(numOfPatty == 0 && numOfChesse != 3)
+            {
+                _recipename += "Veggie ";
+            }
+            
+            if(numOfPatty == 2) {
+                _recipename += "Duplo ";
+            }
+            if(numOfPatty == 3) {
+                _recipename += "Triplo Burguer ";
+            }
+            
+            if(numOfChesse == 1)
+            {
+                _recipename += "X ";
+            }
+            if(numOfChesse > 1)
+            {
+                _recipename += "Extra X ";
+            }
+
+            if(numOfSalad > 0 || numOfCucumber > 0 || numOfTomato > 0) {
+                _recipename += "Salada ";
+            }
+            else 
+            {
+                _recipename += "Burguer ";
+            }
+
+            _currentHamburguer.RecipeName = _recipename;
+
+            ShowInUI(_currentHamburguer);
+        }
+
+        private void getFromList(Hamburguer _currentHamburguer){
+            ShowInUI(_currentHamburguer);
+        }
+
+        private void ShowInUI(Hamburguer _currentHamburguer){
             foreach(GameObject Instance in InstantiatedObjectsUI) { 
                 Destroy(Instance);
             };
